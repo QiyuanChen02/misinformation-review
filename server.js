@@ -11,9 +11,8 @@ app.listen(port, () => {
 	console.log(`Listening at http://localhost:${port}`);
 });
 
-if (process.env.NODE_ENV === "production"){
+if (process.env.NODE_ENV === "production") {
 	app.use(express.static("web/build"));
-
 }
 
 app.use(express.urlencoded({ extended: true }));
@@ -48,7 +47,7 @@ function getPlaces() {
 getPlaces();
 setInterval(() => {
 	getPlaces();
-}, 600000);
+}, 1000 * 60 * 60);
 
 app.get("/data", (req, res) => {
 	const randomIndex = Math.floor(Math.random() * places.length);
