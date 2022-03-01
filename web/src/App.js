@@ -15,6 +15,13 @@ const copyableTexts = [
 	"citizens of russia, we implore you from the west to understand that your media has been compromised and censored. Please, we beg you, understand that Ukraine did not start this war. your president ordered the troops to invade; he committed war crimes, children and families died. we did not provoke this war. your soldiers were sent here to die unprepared. your young people suffer needlessly. nobody wants more. we want one peaceful world. ",
 ];
 
+export function apiDomain() {
+	const production = process.env.NODE_ENV === "production";
+	return production
+		? "https://misinformation-review.herokuapp.com"
+		: "http://localhost:4000";
+}
+
 function App() {
 	return (
 		<Routes>
@@ -96,7 +103,7 @@ function Review() {
 
 	async function getPlace() {
 		try {
-			const response = await axios.get("http://localhost:4000/data");
+			const response = await axios.get(`${apiDomain()}/data`);
 			setPlace(response.data);
 		} catch (e) {
 			console.log(e);
