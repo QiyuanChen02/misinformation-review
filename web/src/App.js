@@ -19,7 +19,7 @@ const copyableTexts = [
 function apiDomain() {
 	const production = process.env.NODE_ENV === "production";
 	return production
-		? "https://misinformation-review.herokuapp.com"
+		? "https://endrussianlies.herokuapp.com"
 		: "http://localhost:4000";
 }
 
