@@ -63,5 +63,5 @@ setInterval(() => {
 
 app.get("/data", (req, res) => {
 	const randomIndex = Math.floor(Math.random() * places.length);
-	res.send(places[randomIndex]);
+	res.send({"randomPlace": places[randomIndex]});
 });
