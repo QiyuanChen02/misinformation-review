@@ -40,29 +40,29 @@ function generateRandomNumber(min, max) {
 	return highlightedNumber.toFixed(3);
 }
 
-function getPlaces() {
-	const lat = generateRandomNumber(55.5, 55.9);
-	const long = generateRandomNumber(37.4, 38.0);
-	axios
-		.get(
-			`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${long}&radius=4000&type=restaurant&key=${apiKey}`
-		)
-		.then((response) => {
-			response.data.results
-				.map((result) => result["place_id"])
-				.filter((id) => !places.includes(id))
-				.forEach((id) => places.push(id));
-			console.log(places.length);
-			const newData = JSON.stringify({ placeIds: places });
-			fs.writeFileSync("placeids.json", newData);
-		})
-		.catch((err) => console.error(err.message));
-}
+// function getPlaces() {
+// 	const lat = generateRandomNumber(55.5, 55.9);
+// 	const long = generateRandomNumber(37.4, 38.0);
+// 	axios
+// 		.get(
+// 			`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${long}&radius=4000&type=restaurant&key=${apiKey}`
+// 		)
+// 		.then((response) => {
+// 			response.data.results
+// 				.map((result) => result["place_id"])
+// 				.filter((id) => !places.includes(id))
+// 				.forEach((id) => places.push(id));
+// 			console.log(places.length);
+// 			const newData = JSON.stringify({ placeIds: places });
+// 			fs.writeFileSync("placeids.json", newData);
+// 		})
+// 		.catch((err) => console.error(err.message));
+// }
 
-getPlaces();
-setInterval(() => {
-	getPlaces();
-}, 1000 * 60 * 60);
+// getPlaces();
+// setInterval(() => {
+// 	getPlaces();
+// }, 1000 * 60 * 60);
 
 app.get("/data", (req, res) => {
 	const randomIndex = Math.floor(Math.random() * places.length);
