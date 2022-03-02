@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 const fs = require("fs");
+const path = require("path");
 
 require("dotenv").config();
 
@@ -48,7 +49,6 @@ function getPlaces() {
 				.map((result) => result["place_id"])
 				.filter((id) => !places.includes(id))
 				.forEach((id) => places.push(id));
-			console.log(places);
 			console.log(places.length);
 			const newData = JSON.stringify({ placeIds: places });
 			fs.writeFileSync("placeids.json", newData);
