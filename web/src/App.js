@@ -44,7 +44,7 @@ function Main() {
 					flexDirection: "column",
 					gap: 3,
 					p: 5,
-					mt: 5,
+					m: 5,
 				}}
 			>
 				<Typography>
@@ -81,7 +81,8 @@ function Main() {
 				<Typography>
 					Also include any media which you think would help convince
 					them, such as videos of captured Russian soldiers saying to
-					stop the war or President Zelensky's speech to the Russian people.
+					stop the war or President Zelensky's speech to the Russian
+					people.
 				</Typography>
 
 				<Typography sx={{ fontWeight: "bold" }}>
