@@ -1,10 +1,11 @@
 import "./app.css";
 import { useState } from "react";
 import axios from "axios";
-import { Box, Button, Container, Link, Paper, Typography } from "@mui/material";
+import { Box, Button, Container, Paper, Typography } from "@mui/material";
 import CopyableText from "./components/CopyableText";
-import { Route, Routes, Link as RouterLink } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Masonry from "react-masonry-css";
+import Heading from "./components/Heading";
 
 const apiKey = "AIzaSyCTtPFwQ5J7LCxe7itX9JqRzyDZyQgGzNQ";
 
@@ -15,7 +16,7 @@ const copyableTexts = [
 	"citizens of russia, we implore you from the west to understand that your media has been compromised and censored. Please, we beg you, understand that Ukraine did not start this war. your president ordered the troops to invade; he committed war crimes, children and families died. we did not provoke this war. your soldiers were sent here to die unprepared. your young people suffer needlessly. nobody wants more. we want one peaceful world. ",
 ];
 
-export function apiDomain() {
+function apiDomain() {
 	const production = process.env.NODE_ENV === "production";
 	return production
 		? "https://misinformation-review.herokuapp.com"
@@ -34,12 +35,7 @@ function App() {
 function Main() {
 	return (
 		<Container>
-			<Typography align="center" component="h1" variant="h2">
-				Misinformation review
-			</Typography>
-			<Typography align="center" variant="h5" component="h2" gutterBottom>
-				Stop the spread of Russian misinformation by leaving a review
-			</Typography>
+			<Heading />
 
 			<Paper
 				elevation={3}
@@ -86,11 +82,13 @@ function Main() {
 					Save Ukraine
 				</Typography>
 				<Typography>
-					Inspired by{" "}
-					<Link href="https://bit.ly/3C3nxYx">this tweet</Link> from
-					'Anonymous'
+					Inspired by <a href="https://bit.ly/3C3nxYx">this tweet</a>{" "}
+					from 'Anonymous'
 				</Typography>
-				<Button variant="contained" component={RouterLink} to="/review">
+				<Button
+					variant="contained"
+					onClick={() => (window.location = `/review`)}
+				>
 					Start reviewing and make a difference
 				</Button>
 			</Paper>
@@ -116,12 +114,8 @@ function Review() {
 
 	return (
 		<Container>
-			<Typography align="center" variant="h2" component="h1">
-				Stop Russian Propoganda
-			</Typography>
-			<Typography align="center" variant="h5" component="h2">
-				Stop the spread of Russian mis-information by leaving a review
-			</Typography>
+			<Heading />
+
 			<Paper sx={{ height: 600, m: 3 }} elevation={10}>
 				<iframe
 					width="100%"
@@ -148,7 +142,10 @@ function Review() {
 				<Button variant="contained" onClick={goToLocation}>
 					Write a review
 				</Button>
-				<Button variant="contained" component={RouterLink} to="/">
+				<Button
+					variant="contained"
+					onClick={() => (window.location = "../")}
+				>
 					About this website
 				</Button>
 			</Box>
@@ -165,7 +162,7 @@ function Review() {
 				columnClassName="my-masonry-grid_column"
 			>
 				{copyableTexts.map((text) => (
-					<CopyableText text={text} />
+					<CopyableText id={text} text={text} />
 				))}
 			</Masonry>
 
