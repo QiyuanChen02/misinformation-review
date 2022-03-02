@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+const fs = require("fs");
 
 require("dotenv").config();
 
@@ -19,8 +20,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
+function getPlaceId() {
+	const rawdata = fs.readFileSync("placeids.json");
+	return JSON.parse(rawdata).placeIds;
+}
+
 const apiKey = process.env.GOOGLE_PLACES_API_KEY;
-const places = [];
+const places = getPlaceId();
 
 function generateRandomNumber(min, max) {
 	highlightedNumber = Math.random() * (max - min) + min;
@@ -40,6 +46,9 @@ function getPlaces() {
 				.filter((id) => !places.includes(id))
 				.forEach((id) => places.push(id));
 			console.log(places);
+			console.log(places.length);
+			const newData = JSON.stringify({ placeIds: places });
+			fs.writeFileSync("placeids.json", newData);
 		})
 		.catch((err) => console.error(err.message));
 }
