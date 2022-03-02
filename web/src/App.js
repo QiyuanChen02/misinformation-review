@@ -78,6 +78,12 @@ function Main() {
 					are more likely to listen to you.
 				</Typography>
 
+				<Typography>
+					Also include any media which you think would help convince
+					them, such as videos of captured Russian soldiers saying to
+					stop the war or President Zelensky's speech to the Russian people.
+				</Typography>
+
 				<Typography sx={{ fontWeight: "bold" }}>
 					Save Ukraine
 				</Typography>
