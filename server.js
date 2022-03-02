@@ -2,12 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 const fs = require("fs");
-const path = require("path");
 
 require("dotenv").config();
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
 	console.log(`Listening at http://localhost:${port}`);
@@ -15,6 +14,12 @@ app.listen(port, () => {
 
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static("web/build"));
+	app.get("/", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "web/build", "index.html"));
+	});
+	app.get("/review", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "web/build", "index.html"));
+	});
 }
 
 app.use(express.urlencoded({ extended: true }));
@@ -62,9 +67,3 @@ app.get("/data", (req, res) => {
 	const randomIndex = Math.floor(Math.random() * places.length);
 	res.send(places[randomIndex]);
 });
-
-if (process.env.NODE_ENV === "production") {
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "web/build", "index.html"));
-	});
-}
