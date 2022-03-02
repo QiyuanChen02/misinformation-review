@@ -103,6 +103,7 @@ function Review() {
 		try {
 			const response = await axios.get(`${apiDomain()}/data`);
 			setPlace(response.data);
+			console.log("Place: ", place)
 		} catch (e) {
 			console.log(e);
 		}
@@ -111,6 +112,11 @@ function Review() {
 	function goToLocation() {
 		window.location = `http://search.google.com/local/writereview?placeid=${place}`;
 	}
+
+	const breakpointsForCols = {
+		default: 2,
+		750: 1,
+	};
 
 	return (
 		<Container>
@@ -130,21 +136,31 @@ function Review() {
 			<Box
 				sx={{
 					display: "flex",
-					gap: 2,
 					justifyContent: "space-evenly",
 					m: 4,
+					gap: 2,
+					flexWrap: "wrap",
 				}}
 				p={4}
 			>
-				<Button variant="contained" onClick={getPlace}>
+				<Button
+					variant="contained"
+					onClick={getPlace}
+					sx={{ minWidth: "14rem" }}
+				>
 					Get new place
 				</Button>
-				<Button variant="contained" onClick={goToLocation}>
+				<Button
+					variant="contained"
+					onClick={goToLocation}
+					sx={{ minWidth: "14rem" }}
+				>
 					Write a review
 				</Button>
 				<Button
 					variant="contained"
 					onClick={() => (window.location = "../")}
+					sx={{ minWidth: "14rem" }}
 				>
 					About this website
 				</Button>
@@ -157,15 +173,16 @@ function Review() {
 				Some sample reviews to copy and paste
 			</Typography>
 			<Masonry
-				breakpointCols={2}
+				breakpointCols={breakpointsForCols}
 				className="my-masonry-grid"
 				columnClassName="my-masonry-grid_column"
 			>
 				{copyableTexts.map((text) => (
-					<CopyableText id={text} text={text} />
+					<CopyableText key={text} text={text} />
 				))}
 			</Masonry>
 
+			{/* Possible stuff to add later */}
 			{/* 
 			<Typography align="center" variant="h3">
 				Useful links
