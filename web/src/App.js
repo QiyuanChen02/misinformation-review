@@ -102,8 +102,8 @@ function Review() {
 	async function getPlace() {
 		try {
 			const response = await axios.get(`${apiDomain()}/data`);
+			console.log(response.data);
 			setPlace(response.data);
-			console.log("Place: ", place)
 		} catch (e) {
 			console.log(e);
 		}
